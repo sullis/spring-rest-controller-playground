@@ -30,5 +30,6 @@
   <modules>
     <module>boot2</module>
     <module>boot3</module>
+    <module>testlib</module>
   </modules>
 </project>
