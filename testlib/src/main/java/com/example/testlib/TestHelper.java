@@ -13,18 +13,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestHelper {
 
   public static void checkEndpoints(String baseUri) throws Exception {
-    check(baseUri + "/echo_json", "application/json", "{}");
-    check(baseUri + "/echo_json", "application/json", "hello");
-    check(baseUri + "/echo_json", "application/json", "\"quoted\"");
+    check(baseUri + "/echo_json", "application/json", "{}", 200);
+    check(baseUri + "/echo_json", "application/json", "hello", 200);
+    check(baseUri + "/echo_json", "application/json", "\"quoted\"", 200);
 
-    check(baseUri + "/echo_plain_text", "text/plain", "hello");
-    check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"");
-    check(baseUri + "/echo_plain_text", "text/plain", "{}");
+    check(baseUri + "/echo_plain_text", "text/plain", "hello", 200);
+    check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"", 200);
+    check(baseUri + "/echo_plain_text", "text/plain", "{}", 200);
   }
 
-  private static void check(String uri, String requestContentType, String requestBody) throws Exception {
+  private static void check(String uri, String requestContentType, String requestBody, int expectedStatusCode) throws Exception {
     HttpResponse<String> response = post(uri, requestContentType, requestBody);
-    assertThat(response.statusCode()).isEqualTo(200);
+    assertThat(response.statusCode()).isEqualTo(expectedStatusCode);
     assertThat(response.body()).isEqualTo(requestBody);
   }
 
