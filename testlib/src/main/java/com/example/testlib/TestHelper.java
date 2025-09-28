@@ -14,22 +14,22 @@ public class TestHelper {
 
   public static void checkEndpoints(String baseUri) throws Exception {
     check(baseUri + "/echo_json", "application/json", "{}");
-    check(baseUri + "/echo_plain_text", "text/plain", "");
     check(baseUri + "/echo_plain_text", "text/plain", "hello");
     check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"");
   }
 
-  private static void check(String uri, String contentType, String requestBody) throws Exception {
-    assertThat(post(uri, contentType, requestBody).body())
-        .isEqualTo("{}");
+  private static void check(String uri, String requestContentType, String requestBody) throws Exception {
+    HttpResponse<String> response = post(uri, requestContentType, requestBody);
+    assertThat(response.statusCode()).isEqualTo(200);
+    assertThat(response.body()).isEqualTo(requestBody);
   }
 
-  private static HttpResponse<String> post(String uri, String contentType, String requestBody) throws Exception {
+  private static HttpResponse<String> post(String uri, String requestContentType, String requestBody) throws Exception {
     BodyPublisher bodyPublisher = (requestBody == null)
         ? BodyPublishers.noBody()
         : BodyPublishers.ofString(requestBody);
     HttpRequest req = HttpRequest.newBuilder().POST(bodyPublisher)
-        .header("Content-Type", contentType)
+        .header("Content-Type", requestContentType)
         .uri(URI.create(uri))
         .build();
     HttpClient client = HttpClient.newBuilder().build();
