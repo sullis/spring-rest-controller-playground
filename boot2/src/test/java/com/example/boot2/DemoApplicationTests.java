@@ -2,12 +2,17 @@ package com.example.boot2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import com.example.testlib.TestHelper;
 
-@SpringBootTest
+
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class DemoApplicationTests {
+  @LocalServerPort int localServerPort;
 
-	@Test
-	void contextLoads() {
-	}
+  @Test
+  void checkEndpoints() throws Exception {
+    TestHelper.checkEndpoints("http://localhost:" + localServerPort);
+  }
 
 }

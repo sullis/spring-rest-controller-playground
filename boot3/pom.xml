@@ -44,6 +44,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+    <dependency>
+      <groupId>com.example</groupId>
+      <artifactId>testlib</artifactId>
+      <version>${version}</version>
+      <scope>test</scope>
+    </dependency>
+
 	</dependencies>
 
 	<build>
