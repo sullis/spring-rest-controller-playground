@@ -32,8 +32,9 @@ public class TestHelper {
         .header("Content-Type", requestContentType)
         .uri(URI.create(uri))
         .build();
-    HttpClient client = HttpClient.newBuilder().build();
-    HttpResponse<String> response = client.send(req, HttpResponse.BodyHandlers.ofString());
-    return response;
+    try (HttpClient client = HttpClient.newBuilder().build()) {
+      HttpResponse<String> response = client.send(req, HttpResponse.BodyHandlers.ofString());
+      return response;
+    }
   }
 }
