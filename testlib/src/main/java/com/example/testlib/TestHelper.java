@@ -17,6 +17,8 @@ public class TestHelper {
     check(baseUri + "/echo_json", "application/json", "hello", 200);
     check(baseUri + "/echo_json", "application/json", "\"quoted\"", 200);
 
+    check(baseUri + "/echo_json", null, "{}", 415);
+
     check(baseUri + "/echo_plain_text", "text/plain", "hello", 200);
     check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"", 200);
     check(baseUri + "/echo_plain_text", "text/plain", "{}", 200);
@@ -25,7 +27,9 @@ public class TestHelper {
   private static void check(String uri, String requestContentType, String requestBody, int expectedStatusCode) throws Exception {
     HttpResponse<String> response = post(uri, requestContentType, requestBody);
     assertThat(response.statusCode()).isEqualTo(expectedStatusCode);
-    assertThat(response.body()).isEqualTo(requestBody);
+    if (expectedStatusCode == 200) {
+      assertThat(response.body()).isEqualTo(requestBody);
+    }
   }
 
   private static HttpResponse<String> post(final String uri, final String requestContentType, final String requestBody) throws Exception {
