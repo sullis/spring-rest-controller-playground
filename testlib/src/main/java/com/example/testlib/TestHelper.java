@@ -16,12 +16,12 @@ public class TestHelper {
     check(baseUri + "/echo_json", "application/json", "{}", 200);
     check(baseUri + "/echo_json", "application/json", "hello", 200);
     check(baseUri + "/echo_json", "application/json", "\"quoted\"", 200);
-
     check(baseUri + "/echo_json", null, "{}", 415);
 
     check(baseUri + "/echo_plain_text", "text/plain", "hello", 200);
     check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"", 200);
     check(baseUri + "/echo_plain_text", "text/plain", "{}", 200);
+    check(baseUri + "/echo_plain_text", null, "{}", 415);
   }
 
   private static void check(String uri, String requestContentType, String requestBody, int expectedStatusCode) throws Exception {
