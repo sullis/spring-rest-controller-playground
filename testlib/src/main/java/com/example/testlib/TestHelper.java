@@ -14,6 +14,9 @@ public class TestHelper {
 
   public static void checkEndpoints(String baseUri) throws Exception {
     check(baseUri + "/echo_json", "application/json", "{}");
+    check(baseUri + "/echo_json", "application/json", "hello");
+    check(baseUri + "/echo_json", "application/json", "\"quoted\"");
+
     check(baseUri + "/echo_plain_text", "text/plain", "hello");
     check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"");
     check(baseUri + "/echo_plain_text", "text/plain", "{}");
