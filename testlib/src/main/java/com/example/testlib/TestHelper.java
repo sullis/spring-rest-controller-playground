@@ -16,6 +16,7 @@ public class TestHelper {
     check(baseUri + "/echo_json", "application/json", "{}");
     check(baseUri + "/echo_plain_text", "text/plain", "hello");
     check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"");
+    check(baseUri + "/echo_plain_text", "text/plain", "{}");
   }
 
   private static void check(String uri, String requestContentType, String requestBody) throws Exception {
