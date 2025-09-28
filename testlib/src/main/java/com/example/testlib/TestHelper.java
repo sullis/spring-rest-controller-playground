@@ -28,17 +28,20 @@ public class TestHelper {
     assertThat(response.body()).isEqualTo(requestBody);
   }
 
-  private static HttpResponse<String> post(String uri, String requestContentType, String requestBody) throws Exception {
+  private static HttpResponse<String> post(final String uri, final String requestContentType, final String requestBody) throws Exception {
     BodyPublisher bodyPublisher = (requestBody == null)
         ? BodyPublishers.noBody()
         : BodyPublishers.ofString(requestBody);
-    HttpRequest req = HttpRequest.newBuilder().POST(bodyPublisher)
-        .header("Content-Type", requestContentType)
-        .uri(URI.create(uri))
-        .build();
+    HttpRequest.Builder reqBuilder = HttpRequest.newBuilder()
+        .POST(bodyPublisher)
+        .uri(URI.create(uri));
+    if (requestContentType != null) {
+      reqBuilder.header("Content-Type", requestContentType);
+    }
+    HttpRequest req = reqBuilder.build();
+
     try (HttpClient client = HttpClient.newBuilder().build()) {
-      HttpResponse<String> response = client.send(req, HttpResponse.BodyHandlers.ofString());
-      return response;
+      return client.send(req, HttpResponse.BodyHandlers.ofString());
     }
   }
 }
