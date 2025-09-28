@@ -7,7 +7,7 @@ import com.example.testlib.TestHelper;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class DemoApplicationTests {
+class Boot3Tests {
   @LocalServerPort int localServerPort;
 
 	@Test
