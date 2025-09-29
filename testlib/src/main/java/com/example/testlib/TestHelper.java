@@ -26,6 +26,9 @@ public class TestHelper {
     check(baseUri + "/consumes_anything", "text/plain", "hello", 200);
     check(baseUri + "/consumes_anything", "text/plain", "\"quoted\"", 200);
     check(baseUri + "/consumes_anything", "text/plain", "{}", 200);
+    check(baseUri + "/consumes_anything", "application/json", "hello", 200);
+    check(baseUri + "/consumes_anything", "application/json", "\"quoted\"", 200);
+    check(baseUri + "/consumes_anything", "application/json", "{}", 200);
     check(baseUri + "/consumes_anything", null, "{}", 200);
     check(baseUri + "/consumes_anything", null, "hello", 200);
     check(baseUri + "/consumes_anything", null, "\"quoted\"", 200);
