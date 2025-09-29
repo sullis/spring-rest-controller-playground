@@ -27,6 +27,8 @@ public class TestHelper {
     check(baseUri + "/consumes_anything", "text/plain", "\"quoted\"", 200);
     check(baseUri + "/consumes_anything", "text/plain", "{}", 200);
     check(baseUri + "/consumes_anything", null, "{}", 200);
+    check(baseUri + "/consumes_anything", null, "hello", 200);
+    check(baseUri + "/consumes_anything", null, "\"quoted\"", 200);
   }
 
   private static void check(String uri, String requestContentType, String requestBody, int expectedStatusCode) throws Exception {
