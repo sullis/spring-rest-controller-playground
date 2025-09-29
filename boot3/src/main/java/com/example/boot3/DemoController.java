@@ -7,17 +7,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class DemoController {
-  @PostMapping(path = "/echo_plain_text",
+  @PostMapping(path = "/consumes_text_plain",
       consumes = "text/plain",
       produces = "text/plain")
-  public String echo_plain_text(@RequestBody String input) {
+  public String consumes_text_plain(@RequestBody String input) {
     return input;
   }
 
-  @PostMapping(path = "/echo_json",
+  @PostMapping(path = "/consumes_application_json",
       consumes = "application/json",
       produces = "application/json")
-  public String echo_json(@RequestBody String input) {
+  public String consumes_application_json(@RequestBody String input) {
+    return input;
+  }
+
+  @PostMapping(path = "/consumes_anything")
+  public String consumes_anything(@RequestBody String input) {
     return input;
   }
 }

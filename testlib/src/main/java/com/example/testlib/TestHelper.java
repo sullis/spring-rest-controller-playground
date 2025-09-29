@@ -13,15 +13,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestHelper {
 
   public static void checkEndpoints(String baseUri) throws Exception {
-    check(baseUri + "/echo_json", "application/json", "{}", 200);
-    check(baseUri + "/echo_json", "application/json", "hello", 200);
-    check(baseUri + "/echo_json", "application/json", "\"quoted\"", 200);
-    check(baseUri + "/echo_json", null, "{}", 415);
+    check(baseUri + "/consumes_application_json", "application/json", "{}", 200);
+    check(baseUri + "/consumes_application_json", "application/json", "hello", 200);
+    check(baseUri + "/consumes_application_json", "application/json", "\"quoted\"", 200);
+    check(baseUri + "/consumes_application_json", null, "{}", 415);
 
-    check(baseUri + "/echo_plain_text", "text/plain", "hello", 200);
-    check(baseUri + "/echo_plain_text", "text/plain", "\"quoted\"", 200);
-    check(baseUri + "/echo_plain_text", "text/plain", "{}", 200);
-    check(baseUri + "/echo_plain_text", null, "{}", 415);
+    check(baseUri + "/consumes_text_plain", "text/plain", "hello", 200);
+    check(baseUri + "/consumes_text_plain", "text/plain", "\"quoted\"", 200);
+    check(baseUri + "/consumes_text_plain", "text/plain", "{}", 200);
+    check(baseUri + "/consumes_text_plain", null, "{}", 415);
+
+    check(baseUri + "/consumes_anything", "text/plain", "hello", 200);
+    check(baseUri + "/consumes_anything", "text/plain", "\"quoted\"", 200);
+    check(baseUri + "/consumes_anything", "text/plain", "{}", 200);
+    check(baseUri + "/consumes_anything", null, "{}", 200);
   }
 
   private static void check(String uri, String requestContentType, String requestBody, int expectedStatusCode) throws Exception {
