@@ -1,4 +1,4 @@
-package com.example.boot3;
+package com.example.boot4;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,7 +7,7 @@ import com.example.testlib.TestHelper;
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class Boot3Tests {
+class Boot4Tests {
   @LocalServerPort int localServerPort;
 
 	@Test
